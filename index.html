@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maker Space - Learn Through Play</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .kits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .kit-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .kit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .kit-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .gradient-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-2 { background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%); }
+        .gradient-3 { background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); }
+        .gradient-4 { background: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%); }
+        .gradient-5 { background: linear-gradient(135deg, #7f7fd5 0%, #86a8e7 100%); }
+        .gradient-6 { background: linear-gradient(135deg, #b490ca 0%, #5f72bd 100%); }
+
+        .kit-content {
+            padding: 1.5rem;
+        }
+
+        .kit-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .kit-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .activities-list {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .activities-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activities-list li:before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .view-button {
+            width: 100%;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: bold;
+        }
+
+        .view-button:hover {
+            opacity: 0.9;
+        }
+
+        .video-section {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 0;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 2rem;
+            color: white;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .close-button:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn {
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .kit-details {
+            margin-bottom: 2rem;
+        }
+
+        .kit-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .kit-details .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .details-activities {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .details-activities li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .details-activities li:before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .purchase-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .purchase-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            color: white;
+        }
+
+        .purchase-button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%);
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .success-content h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .success-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .close-success {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🔧 Maker Space</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#kits">Kits</a></li>
+                <li><a href="#video">Videos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Ignite Curiosity Through Hands-On Learning</h1>
+        <p>Premium STEM kits designed to inspire the next generation of innovators</p>
+        <button class="cta-button" onclick="document.getElementById('kits').scrollIntoView({behavior: 'smooth'})">
+            Explore Our Kits
+        </button>
+    </section>
+
+    <section class="container" id="kits">
+        <h2 class="section-title">Our STEM Kits</h2>
+        <div class="kits-grid" id="kitsContainer"></div>
+    </section>
+
+    <section class="video-section" id="video">
+        <div class="video-container">
+            <h2 class="section-title">See Our Kits in Action</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Watch how students explore, learn, and create with Maker Space kits</p>
+            <div class="video-placeholder" onclick="playMainVideo()">
+                ▶️
+                <div style="position: absolute; bottom: 20px; font-size: 1.2rem;">Click to Play Demo Video</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title" style="color: white; -webkit-text-fill-color: white;">Get in Touch</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone">
+                </div>
+                <div class="form-group">
+                    <label>Select Kit</label>
+                    <select name="kit" id="kitSelect"></select>
+                </div>
+                <div class="form-group">
+                    <label>Message *</label>
+                    <textarea name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Inquiry</button>
+            </form>
+            <div class="contact-info">
+                <p>📧 Email: hello@makerspace.com</p>
+                <p>📞 Phone: +1 (555) 123-4567</p>
+                <p>📍 Location: 123 Innovation Drive, Tech City, TC 12345</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Maker Space. All rights reserved.</p>
+        <p>Inspiring young minds through science, technology, engineering, and mathematics</p>
+    </footer>
+
+    <div class="modal" id="kitModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <button class="close-button" onclick="closeKitModal()">&times;</button>
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <!-- Carousel slides will be inserted here -->
+                </div>
+                <div class="kit-details">
+                    <h3 id="detailsTitle"></h3>
+                    <div class="price" id="detailsPrice"></div>
+                    <ul class="details-activities" id="detailsActivities"></ul>
+                </div>
+                <div class="purchase-cta">
+                    <button class="purchase-button btn-primary" onclick="purchaseNow()">
+                        🛒 Purchase Now
+                    </button>
+                    <button class="purchase-button btn-secondary" onclick="contactAboutKit()">
+                        💬 Contact Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <h3>✅ Success!</h3>
+            <p id="successMessage">Thank you for your interest. We'll get back to you within 24 hours.</p>
+            <button class="close-success" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const kits = [
+            {
+                name: "Arts & Craft Kit",
+                price: "GHS 250",
+                icon: "🤖",
+                gradient: "gradient-1",
+                color: "#667eea",
+                images: [
+                    { icon: "🤖", caption: "Bead making", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Canvas Painting", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Journal Design", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sewing Project", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
+                ],
+                activities: [
+                    "Bead making",
+                    "Canvas Painting",
+                    "Journal Design",
+                    "Sewing Project",
+                    "Freebies"
+                ]
+            },
+            {
+                name: "Ananse Pack",
+                price: "GHS 250",
+                icon: "🤖",
+                gradient: "gradient-1",
+                color: "#667eea",
+                images: [
+                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
+                ],
+                activities: [
+                    "Build your first robot",
+                    "Learn basic programming",
+                    "Motor control exercises",
+                    "Sensor integration",
+                    "5 guided projects"
+                ]
+            },
+            {
+                name: "Robotics Starter Pack",
+                price: "$79.99",
+                icon: "🤖",
+                gradient: "gradient-1",
+                color: "#667eea",
+                images: [
+                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
+                ],
+                activities: [
+                    "Build your first robot",
+                    "Learn basic programming",
+                    "Motor control exercises",
+                    "Sensor integration",
+                    "5 guided projects"
+                ]
+            },
+            
+            {
+                name: "Electronics Circuit Set",
+                price: "$89.99",
+                icon: "⚡",
+                gradient: "gradient-3",
+                color: "#3f2b96",
+                images: [
+                    { icon: "⚡", caption: "Build Working Circuits", gradient: "gradient-3" },
+                    { icon: "💡", caption: "LED Light Projects", gradient: "gradient-3" },
+                    { icon: "🔌", caption: "Arduino Basics", gradient: "gradient-3" },
+                    { icon: "🔋", caption: "Breadboard Experiments", gradient: "gradient-3" },
+                    { icon: "📐", caption: "10 Circuit Designs", gradient: "gradient-3" }
+                ],
+                activities: [
+                    "Build working circuits",
+                    "LED light projects",
+                    "Arduino basics",
+                    "Breadboard experiments",
+                    "10 circuit designs"
+                ]
+            },
+            {
+                name: "Physics Explorer",
+                price: "$69.99",
+                icon: "🔭",
+                gradient: "gradient-4",
+                color: "#6e48aa",
+                images: [
+                    { icon: "🔭", caption: "Force & Motion Experiments", gradient: "gradient-4" },
+                    { icon: "⚙️", caption: "Build Simple Machines", gradient: "gradient-4" },
+                    { icon: "⚡", caption: "Energy Demonstrations", gradient: "gradient-4" },
+                    { icon: "🌍", caption: "Gravity Experiments", gradient: "gradient-4" },
+                    { icon: "🎯", caption: "12 Hands-On Activities", gradient: "gradient-4" }
+                ],
+                activities: [
+                    "Force & motion experiments",
+                    "Build simple machines",
+                    "Energy demonstrations",
+                    "Gravity experiments",
+                    "12 hands-on activities"
+                ]
+            },
+            {
+                name: "Coding Adventure",
+                price: "$54.99",
+                icon: "💻",
+                gradient: "gradient-5",
+                color: "#7f7fd5",
+                images: [
+                    { icon: "🐍", caption: "Learn Python Basics", gradient: "gradient-5" },
+                    { icon: "🎮", caption: "Create Interactive Games", gradient: "gradient-5" },
+                    { icon: "🧩", caption: "Algorithm Challenges", gradient: "gradient-5" },
+                    { icon: "📚", caption: "Project-Based Learning", gradient: "gradient-5" },
+                    { icon: "🌐", caption: "Online Platform Access", gradient: "gradient-5" }
+                ],
+                activities: [
+                    "Learn Python basics",
+                    "Create interactive games",
+                    "Algorithm challenges",
+                    "Project-based learning",
+                    "Online platform access"
+                ]
+            },
+            
+        ];
+
+        let currentKit = null;
+        let currentSlide = 0;
+        let carouselInterval = null;
+
+        function renderKits() {
+            const container = document.getElementById('kitsContainer');
+            const select = document.getElementById('kitSelect');
+            
+            select.innerHTML = '<option value="">Select a kit...</option>';
+            
+            kits.forEach((kit, index) => {
+                const card = document.createElement('div');
+                card.className = 'kit-card';
+                card.onclick = () => openKitModal(index);
+                card.innerHTML = `
+                    <div class="kit-image ${kit.gradient}">${kit.icon}</div>
+                    <div class="kit-content">
+                        <h3 class="kit-title">${kit.name}</h3>
+                        <div class="kit-price" style="color: ${kit.color}">${kit.price}</div>
+                        <ul class="activities-list">
+                            ${kit.activities.map(activity => `<li style="color: ${kit.color}">${activity}</li>`).join('')}
+                        </ul>
+                        <button class="view-button ${kit.gradient}">View Details & Video</button>
+                    </div>
+                `;
+                container.appendChild(card);
+                
+                const option = document.createElement('option');
+                option.value = kit.name;
+                option.textContent = kit.name;
+                select.appendChild(option);
+            });
+        }
+
+        function openKitModal(index) {
+            currentKit = kits[index];
+            currentSlide = 0;
+            const modal = document.getElementById('kitModal');
+            const modalHeader = document.getElementById('modalHeader');
+            const carouselWrapper = document.getElementById('carouselWrapper');
+            
+            modalHeader.className = `modal-header ${currentKit.gradient}`;
+            document.getElementById('modalTitle').textContent = currentKit.name;
+            document.getElementById('detailsTitle').textContent = currentKit.name;
+            document.getElementById('detailsPrice').textContent = currentKit.price;
+            document.getElementById('detailsPrice').style.color = currentKit.color;
+            
+            const activitiesList = document.getElementById('detailsActivities');
+            activitiesList.innerHTML = currentKit.activities
+                .map(activity => `<li style="border-left: 4px solid ${currentKit.color}">${activity}</li>`)
+                .join('');
+            
+            // Create carousel
+            let carouselHTML = '';
+            currentKit.images.forEach((img, idx) => {
+                carouselHTML += `
+                    <div class="carousel-slide ${idx === 0 ? 'active' : ''} ${img.gradient}">
+                        <div style="font-size: 6rem;">${img.icon}</div>
+                        <div class="carousel-caption">${img.caption}</div>
+                    </div>
+                `;
+            });
+            
+            // Add controls
+            carouselHTML += `
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="prevSlide()">❮</button>
+                    <button class="carousel-btn" onclick="nextSlide()">❯</button>
+                </div>
+                <div class="carousel-indicators">
+                    ${currentKit.images.map((_, idx) => 
+                        `<button class="indicator ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})"></button>`
+                    ).join('')}
+                </div>
+            `;
+            
+            carouselWrapper.innerHTML = carouselHTML;
+            modal.style.display = 'flex';
+            
+            // Start auto-play
+            startCarousel();
+        }
+
+        function closeKitModal() {
+            const modal = document.getElementById('kitModal');
+            stopCarousel();
+            modal.style.display = 'none';
+            currentKit = null;
+            currentSlide = 0;
+        }
+
+        function startCarousel() {
+            stopCarousel();
+            carouselInterval = setInterval(() => {
+                nextSlide();
+            }, 3000);
+        }
+
+        function stopCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
+        }
+
+        function showSlide(index) {
+            if (!currentKit) return;
+            
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+            
+            currentSlide = (index + currentKit.images.length) % currentKit.images.length;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(index) {
+            stopCarousel();
+            showSlide(index);
+            startCarousel();
+        }
+
+        function purchaseNow() {
+            if (currentKit) {
+                document.getElementById('successMessage').textContent = 
+                    `Great choice! You've selected the ${currentKit.name}. Our team will contact you shortly to complete your purchase.`;
+                closeKitModal();
+                document.getElementById('successModal').style.display = 'flex';
+            }
+        }
+
+        function contactAboutKit() {
+            if (currentKit) {
+                document.getElementById('kitSelect').value = currentKit.name;
+                closeKitModal();
+                document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+            }
+        }
+
+        function playMainVideo() {
+            alert('Main demo video would play here! In a real implementation, this would showcase all kits in action.');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').textContent = 
+                'Thank you for your interest. We\'ll get back to you within 24 hours.';
+            document.getElementById('successModal').style.display = 'flex';
+            this.reset();
+        });
+
+        window.onclick = function(event) {
+            const kitModal = document.getElementById('kitModal');
+            if (event.target === kitModal) {
+                closeKitModal();
+            }
+        }
+
+        renderKits();
+    </script>
+</body>
+</html>
