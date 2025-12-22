@@ -204,13 +204,19 @@
         .video-placeholder {
             width: 100%;
             aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 4rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
         }
 
         .contact-section {
@@ -285,6 +291,17 @@
             color: white;
             text-align: center;
             padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         .modal {
@@ -385,13 +402,12 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 0.5rem;
+            padding: 0 1rem;
             transform: translateY(-50%);
-            pointer-events: none;
         }
 
         .carousel-btn {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.8);
             border: none;
             width: 50px;
             height: 50px;
@@ -403,14 +419,11 @@
             align-items: center;
             justify-content: center;
             color: #333;
-            pointer-events: all;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .carousel-btn:active {
+        .carousel-btn:hover {
             background: white;
-            transform: scale(0.95);
+            transform: scale(1.1);
         }
 
         .carousel-indicators {
@@ -431,18 +444,12 @@
             border: none;
             cursor: pointer;
             transition: all 0.3s;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .indicator.active {
             background: white;
             width: 30px;
             border-radius: 6px;
-        }
-
-        .indicator:active {
-            transform: scale(0.9);
         }
 
         .kit-details {
@@ -553,117 +560,6 @@
             font-size: 1.1rem;
             font-weight: bold;
         }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            nav {
-                padding: 0 1rem;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .kits-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .modal-content {
-                margin: 1rem;
-                max-height: 95vh;
-            }
-
-            .modal-header {
-                padding: 1.5rem;
-            }
-
-            .modal-body {
-                padding: 1rem;
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .carousel-slide {
-                font-size: 3rem;
-            }
-
-            .carousel-slide > div:first-child {
-                font-size: 4rem !important;
-            }
-
-            .carousel-caption {
-                font-size: 0.9rem;
-                padding: 0.7rem;
-            }
-
-            .carousel-controls {
-                padding: 0 0.5rem;
-            }
-
-            .purchase-cta {
-                flex-direction: column;
-            }
-
-            .purchase-button {
-                width: 100%;
-                min-width: unset;
-            }
-
-            .kit-details h3 {
-                font-size: 1.5rem;
-            }
-
-            .kit-details .price {
-                font-size: 2rem;
-            }
-
-            .details-activities li {
-                font-size: 1rem;
-                padding: 0.8rem;
-            }
-
-            .contact-section {
-                padding: 3rem 1rem;
-            }
-
-            .video-section {
-                padding: 3rem 1rem;
-            }
-
-            .success-content {
-                padding: 2rem;
-                margin: 1rem;
-            }
-
-            .success-content h3 {
-                font-size: 1.5rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -696,8 +592,9 @@
         <div class="video-container">
             <h2 class="section-title">See Our Kits in Action</h2>
             <p style="margin-bottom: 2rem; font-size: 1.1rem;">Watch how students explore, learn, and create with Maker Space kits</p>
-            <div class="video-placeholder">
-                🎬
+            <div class="video-placeholder" onclick="playMainVideo()">
+                ▶️
+                <div style="position: absolute; bottom: 20px; font-size: 1.2rem;">Click to Play Demo Video</div>
             </div>
         </div>
     </section>
@@ -781,15 +678,15 @@
             {
                 name: "Arts & Craft Kit",
                 price: "GHS 250",
-                icon: "🎨",
+                icon: "🤖",
                 gradient: "gradient-1",
                 color: "#667eea",
                 images: [
-                    { icon: "📿", caption: "Bead making", gradient: "gradient-1" },
-                    { icon: "🎨", caption: "Canvas Painting", gradient: "gradient-1" },
-                    { icon: "📔", caption: "Journal Design", gradient: "gradient-1" },
-                    { icon: "🧵", caption: "Sewing Project", gradient: "gradient-1" },
-                    { icon: "🎁", caption: "Freebies Included", gradient: "gradient-1" }
+                    { icon: "🤖", caption: "Bead making", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Canvas Painting", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Journal Design", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sewing Project", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
                 ],
                 activities: [
                     "Bead making",
@@ -802,36 +699,15 @@
             {
                 name: "Ananse Pack",
                 price: "GHS 250",
-                icon: "🕷️",
-                gradient: "gradient-2",
-                color: "#8e54e9",
-                images: [
-                    { icon: "🕷️", caption: "Traditional Stories", gradient: "gradient-2" },
-                    { icon: "📚", caption: "Cultural Activities", gradient: "gradient-2" },
-                    { icon: "🎭", caption: "Creative Drama", gradient: "gradient-2" },
-                    { icon: "🖼️", caption: "Art Projects", gradient: "gradient-2" },
-                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-2" }
-                ],
-                activities: [
-                    "Traditional storytelling",
-                    "Cultural activities",
-                    "Creative drama",
-                    "Art projects",
-                    "5 guided projects"
-                ]
-            },
-            {
-                name: "Robotics Starter Pack",
-                price: "$79.99",
                 icon: "🤖",
-                gradient: "gradient-3",
-                color: "#3f2b96",
+                gradient: "gradient-1",
+                color: "#667eea",
                 images: [
-                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-3" },
-                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-3" },
-                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-3" },
-                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-3" },
-                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-3" }
+                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
                 ],
                 activities: [
                     "Build your first robot",
@@ -842,17 +718,39 @@
                 ]
             },
             {
+                name: "Robotics Starter Pack",
+                price: "$79.99",
+                icon: "🤖",
+                gradient: "gradient-1",
+                color: "#667eea",
+                images: [
+                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
+                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
+                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
+                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
+                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
+                ],
+                activities: [
+                    "Build your first robot",
+                    "Learn basic programming",
+                    "Motor control exercises",
+                    "Sensor integration",
+                    "5 guided projects"
+                ]
+            },
+            
+            {
                 name: "Electronics Circuit Set",
                 price: "$89.99",
                 icon: "⚡",
-                gradient: "gradient-4",
-                color: "#6e48aa",
+                gradient: "gradient-3",
+                color: "#3f2b96",
                 images: [
-                    { icon: "⚡", caption: "Build Working Circuits", gradient: "gradient-4" },
-                    { icon: "💡", caption: "LED Light Projects", gradient: "gradient-4" },
-                    { icon: "🔌", caption: "Arduino Basics", gradient: "gradient-4" },
-                    { icon: "🔋", caption: "Breadboard Experiments", gradient: "gradient-4" },
-                    { icon: "📐", caption: "10 Circuit Designs", gradient: "gradient-4" }
+                    { icon: "⚡", caption: "Build Working Circuits", gradient: "gradient-3" },
+                    { icon: "💡", caption: "LED Light Projects", gradient: "gradient-3" },
+                    { icon: "🔌", caption: "Arduino Basics", gradient: "gradient-3" },
+                    { icon: "🔋", caption: "Breadboard Experiments", gradient: "gradient-3" },
+                    { icon: "📐", caption: "10 Circuit Designs", gradient: "gradient-3" }
                 ],
                 activities: [
                     "Build working circuits",
@@ -866,14 +764,14 @@
                 name: "Physics Explorer",
                 price: "$69.99",
                 icon: "🔭",
-                gradient: "gradient-5",
-                color: "#7f7fd5",
+                gradient: "gradient-4",
+                color: "#6e48aa",
                 images: [
-                    { icon: "🔭", caption: "Force & Motion Experiments", gradient: "gradient-5" },
-                    { icon: "⚙️", caption: "Build Simple Machines", gradient: "gradient-5" },
-                    { icon: "⚡", caption: "Energy Demonstrations", gradient: "gradient-5" },
-                    { icon: "🌍", caption: "Gravity Experiments", gradient: "gradient-5" },
-                    { icon: "🎯", caption: "12 Hands-On Activities", gradient: "gradient-5" }
+                    { icon: "🔭", caption: "Force & Motion Experiments", gradient: "gradient-4" },
+                    { icon: "⚙️", caption: "Build Simple Machines", gradient: "gradient-4" },
+                    { icon: "⚡", caption: "Energy Demonstrations", gradient: "gradient-4" },
+                    { icon: "🌍", caption: "Gravity Experiments", gradient: "gradient-4" },
+                    { icon: "🎯", caption: "12 Hands-On Activities", gradient: "gradient-4" }
                 ],
                 activities: [
                     "Force & motion experiments",
@@ -887,14 +785,14 @@
                 name: "Coding Adventure",
                 price: "$54.99",
                 icon: "💻",
-                gradient: "gradient-6",
-                color: "#5f72bd",
+                gradient: "gradient-5",
+                color: "#7f7fd5",
                 images: [
-                    { icon: "🐍", caption: "Learn Python Basics", gradient: "gradient-6" },
-                    { icon: "🎮", caption: "Create Interactive Games", gradient: "gradient-6" },
-                    { icon: "🧩", caption: "Algorithm Challenges", gradient: "gradient-6" },
-                    { icon: "📚", caption: "Project-Based Learning", gradient: "gradient-6" },
-                    { icon: "🌐", caption: "Online Platform Access", gradient: "gradient-6" }
+                    { icon: "🐍", caption: "Learn Python Basics", gradient: "gradient-5" },
+                    { icon: "🎮", caption: "Create Interactive Games", gradient: "gradient-5" },
+                    { icon: "🧩", caption: "Algorithm Challenges", gradient: "gradient-5" },
+                    { icon: "📚", caption: "Project-Based Learning", gradient: "gradient-5" },
+                    { icon: "🌐", caption: "Online Platform Access", gradient: "gradient-5" }
                 ],
                 activities: [
                     "Learn Python basics",
@@ -903,7 +801,8 @@
                     "Project-based learning",
                     "Online platform access"
                 ]
-            }
+            },
+            
         ];
 
         let currentKit = null;
@@ -963,4 +862,123 @@
             currentKit.images.forEach((img, idx) => {
                 carouselHTML += `
                     <div class="carousel-slide ${idx === 0 ? 'active' : ''} ${img.gradient}">
-                        <div style="
+                        <div style="font-size: 6rem;">${img.icon}</div>
+                        <div class="carousel-caption">${img.caption}</div>
+                    </div>
+                `;
+            });
+            
+            // Add controls
+            carouselHTML += `
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="prevSlide()">❮</button>
+                    <button class="carousel-btn" onclick="nextSlide()">❯</button>
+                </div>
+                <div class="carousel-indicators">
+                    ${currentKit.images.map((_, idx) => 
+                        `<button class="indicator ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})"></button>`
+                    ).join('')}
+                </div>
+            `;
+            
+            carouselWrapper.innerHTML = carouselHTML;
+            modal.style.display = 'flex';
+            
+            // Start auto-play
+            startCarousel();
+        }
+
+        function closeKitModal() {
+            const modal = document.getElementById('kitModal');
+            stopCarousel();
+            modal.style.display = 'none';
+            currentKit = null;
+            currentSlide = 0;
+        }
+
+        function startCarousel() {
+            stopCarousel();
+            carouselInterval = setInterval(() => {
+                nextSlide();
+            }, 3000);
+        }
+
+        function stopCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
+        }
+
+        function showSlide(index) {
+            if (!currentKit) return;
+            
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+            
+            currentSlide = (index + currentKit.images.length) % currentKit.images.length;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(index) {
+            stopCarousel();
+            showSlide(index);
+            startCarousel();
+        }
+
+        function purchaseNow() {
+            if (currentKit) {
+                document.getElementById('successMessage').textContent = 
+                    `Great choice! You've selected the ${currentKit.name}. Our team will contact you shortly to complete your purchase.`;
+                closeKitModal();
+                document.getElementById('successModal').style.display = 'flex';
+            }
+        }
+
+        function contactAboutKit() {
+            if (currentKit) {
+                document.getElementById('kitSelect').value = currentKit.name;
+                closeKitModal();
+                document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+            }
+        }
+
+        function playMainVideo() {
+            alert('Main demo video would play here! In a real implementation, this would showcase all kits in action.');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').textContent = 
+                'Thank you for your interest. We\'ll get back to you within 24 hours.';
+            document.getElementById('successModal').style.display = 'flex';
+            this.reset();
+        });
+
+        window.onclick = function(event) {
+            const kitModal = document.getElementById('kitModal');
+            if (event.target === kitModal) {
+                closeKitModal();
+            }
+        }
+
+        renderKits();
+    </script>
+</body>
+</html>
