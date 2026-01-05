@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maker Space - Learn Through Play</title>
+    <title>Maker Space - STEM Kits for Kids</title>
     <style>
         * {
             margin: 0;
@@ -15,510 +15,308 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
+        /* Navigation */
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
+            background: linear-gradient(135deg, #A8E6CF, #FFD3B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
+        nav ul {
+            list-style: none;
             display: flex;
             gap: 2rem;
-            list-style: none;
         }
 
-        .nav-links a {
-            color: white;
+        nav a {
             text-decoration: none;
-            transition: opacity 0.3s;
+            color: #555;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
+        nav a:hover {
+            color: #FF8B94;
         }
 
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 2rem;
+        /* Landing Section */
+        #landing {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: linear-gradient(135deg, 
+                rgba(168, 230, 207, 0.7) 0%, 
+                rgba(255, 211, 182, 0.7) 50%, 
+                rgba(255, 170, 165, 0.7) 100%);
+        }
+
+        #landing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(168, 230, 207, 0.8),
+                rgba(255, 211, 182, 0.8),
+                rgba(200, 162, 255, 0.8),
+                rgba(255, 139, 148, 0.8),
+                rgba(255, 105, 135, 0.8),
+                rgba(144, 238, 144, 0.8));
+            background-size: 600% 600%;
+            animation: gradientWave 20s ease infinite;
+            z-index: 1;
+        }
+
+        @keyframes gradientWave {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 75%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 25%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .circuit-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: 2;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background: #fff;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        .ocean-layer {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 40%;
+            opacity: 0.5;
+        }
+
+        .wave1 {
+            background: radial-gradient(ellipse at center, rgba(200, 162, 255, 0.5) 0%, transparent 70%);
+            animation: wave 20s ease-in-out infinite;
+        }
+
+        .wave2 {
+            background: radial-gradient(ellipse at center, rgba(255, 105, 135, 0.5) 0%, transparent 70%);
+            animation: wave 25s ease-in-out infinite reverse;
+        }
+
+        .wave3 {
+            background: radial-gradient(ellipse at center, rgba(144, 238, 144, 0.5) 0%, transparent 70%);
+            animation: wave 30s ease-in-out infinite;
+            animation-delay: -5s;
+        }
+
+        .wave4 {
+            background: radial-gradient(ellipse at center, rgba(168, 230, 207, 0.4) 0%, transparent 70%);
+            animation: wave 22s ease-in-out infinite;
+            animation-delay: -10s;
+        }
+
+        .wave5 {
+            background: radial-gradient(ellipse at center, rgba(255, 211, 182, 0.4) 0%, transparent 70%);
+            animation: wave 28s ease-in-out infinite reverse;
+            animation-delay: -7s;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-10%, -10%) rotate(0deg);
+            }
+            33% {
+                transform: translate(5%, -15%) rotate(120deg);
+            }
+            66% {
+                transform: translate(-15%, 5%) rotate(240deg);
+            }
+        }
+
+        .hero-content {
             text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            position: relative;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: #fff;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .hero p {
-            font-size: 1.3rem;
+        .hero-content p {
+            font-size: 1.5rem;
+            color: #fff;
             margin-bottom: 2rem;
         }
 
         .cta-button {
-            background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border: none;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #FF8B94;
+            color: white;
+            text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .cta-button:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        /* About Section */
+        #about {
+            padding: 5rem 2rem;
+            background: #FFF;
+            text-align: center;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
+            color: #FF8B94;
         }
 
-        .kits-grid {
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Packs Section */
+        #packs {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #FFF 0%, #F7F7F7 100%);
+        }
+
+        .packs-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto;
         }
 
-        .kit-card {
+        .pack-card {
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
-        .kit-card:hover {
+        .pack-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .kit-image {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+        .pack-card.ananse {
+            border-top: 5px solid #A8E6CF;
         }
 
-        .gradient-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .gradient-2 { background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%); }
-        .gradient-3 { background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); }
-        .gradient-4 { background: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%); }
-        .gradient-5 { background: linear-gradient(135deg, #7f7fd5 0%, #86a8e7 100%); }
-        .gradient-6 { background: linear-gradient(135deg, #b490ca 0%, #5f72bd 100%); }
-
-        .kit-content {
-            padding: 1.5rem;
+        .pack-card.alikoto {
+            border-top: 5px solid #FFD3B6;
         }
 
-        .kit-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .pack-card.sankofa {
+            border-top: 5px solid #FFAAA5;
+        }
+
+        .pack-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .pack-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: #333;
         }
 
-        .kit-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
+        .pack-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
         }
 
-        .activities-list {
-            list-style: none;
-            margin-bottom: 1rem;
-        }
-
-        .activities-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .activities-list li:before {
-            content: "✓ ";
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .view-button {
-            width: 100%;
+        .pack-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #FF8B94;
             color: white;
-            padding: 1rem;
+            text-decoration: none;
+            border-radius: 25px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: opacity 0.3s;
-            font-weight: bold;
-        }
-
-        .view-button:hover {
-            opacity: 0.9;
-        }
-
-        .video-section {
-            background: #f8f9fa;
-            padding: 4rem 2rem;
-        }
-
-        .video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .video-placeholder:hover {
-            transform: scale(1.02);
-        }
-
-        .contact-section {
-            background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%);
-            color: white;
-            padding: 4rem 2rem;
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
             font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-button {
-            background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .submit-button:hover {
-            transform: scale(1.05);
-        }
-
-        .contact-info {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .contact-info p {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-        }
-
-        footer {
-            background: #2d3748;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 0;
-            border-radius: 20px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 2rem;
-            color: white;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255,255,255,0.3);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        .close-button:hover {
-            background: rgba(255,255,255,0.5);
+        .pack-button:hover {
+            background: #ff6b7a;
         }
 
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .carousel-wrapper {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        .carousel-slide {
-            width: 100%;
-            height: 100%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
-            position: relative;
-        }
-
-        .carousel-slide.active {
-            display: flex;
-        }
-
-        .carousel-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-            transform: translateY(-50%);
-        }
-
-        .carousel-btn {
-            background: rgba(255,255,255,0.8);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-        }
-
-        .carousel-btn:hover {
-            background: white;
-            transform: scale(1.1);
-        }
-
-        .carousel-indicators {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .indicator.active {
-            background: white;
-            width: 30px;
-            border-radius: 6px;
-        }
-
-        .kit-details {
-            margin-bottom: 2rem;
-        }
-
-        .kit-details h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .kit-details .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-        }
-
-        .details-activities {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .details-activities li {
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            font-size: 1.1rem;
-        }
-
-        .details-activities li:before {
-            content: "✓ ";
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .purchase-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .purchase-button {
-            flex: 1;
-            min-width: 200px;
-            padding: 1.5rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s;
-            color: white;
-        }
-
-        .purchase-button:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #8e54e9 0%, #4776e6 100%);
-        }
-
-        .success-modal {
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -529,476 +327,353 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
         }
 
-        .success-content {
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
             background: white;
-            padding: 3rem;
+            border-radius: 20px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #666;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: #f0f0f0;
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .activity-item {
+            background: #f9f9f9;
             border-radius: 15px;
-            max-width: 500px;
+            padding: 1.5rem;
             text-align: center;
         }
 
-        .success-content h3 {
-            color: #667eea;
+        .activity-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #A8E6CF, #FFD3B6);
+            border-radius: 10px;
             margin-bottom: 1rem;
-            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
 
-        .success-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+        .activity-item h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
         }
 
-        .close-success {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .activity-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 5rem 2rem;
+            background: #FF8B94;
             color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
+            text-align: center;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .packs-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">🔧 Maker Space</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#kits">Kits</a></li>
-                <li><a href="#video">Videos</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🚀 Maker Space</div>
+        <ul>
+            <li><a href="#landing">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#packs">Packs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <section class="hero" id="home">
-        <h1>Ignite Curiosity Through Hands-On Learning</h1>
-        <p>Premium STEM kits designed to inspire the next generation of innovators</p>
-        <button class="cta-button" onclick="document.getElementById('kits').scrollIntoView({behavior: 'smooth'})">
-            Explore Our Kits
-        </button>
+    <!-- Landing Section -->
+    <section id="landing">
+        <div class="ocean-layer">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="wave wave4"></div>
+            <div class="wave wave5"></div>
+        </div>
+        <div class="circuit-bg" id="circuits"></div>
+        <div class="hero-content">
+            <h1>Welcome to Maker Space</h1>
+            <p>Inspiring Young Minds Through STEM Adventures</p>
+            <a href="#packs" class="cta-button">Explore Our Packs</a>
+        </div>
     </section>
 
-    <section class="container" id="kits">
-        <h2 class="section-title">Our STEM Kits</h2>
-        <div class="kits-grid" id="kitsContainer"></div>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Maker Space</h2>
+        <div class="about-content">
+            <p>At Maker Space, we believe every child is a natural inventor, scientist, and creator. Our carefully curated STEM kits bring the excitement of discovery right to your home, combining hands-on activities with educational fun.</p>
+            <p style="margin-top: 1.5rem;">Each pack is designed to spark curiosity, develop critical thinking skills, and make learning an adventure. From coding robots to building circuits, our kits empower kids to explore, experiment, and innovate.</p>
+        </div>
     </section>
 
-    <section class="video-section" id="video">
-        <div class="video-container">
-            <h2 class="section-title">See Our Kits in Action</h2>
-            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Watch how students explore, learn, and create with Maker Space kits</p>
-            <div class="video-placeholder" onclick="playMainVideo()">
-                ▶️
-                <div style="position: absolute; bottom: 20px; font-size: 1.2rem;">Click to Play Demo Video</div>
+    <!-- Packs Section -->
+    <section id="packs">
+        <h2 class="section-title" style="text-align: center;">Our STEM Packs</h2>
+        <div class="packs-container">
+            <!-- Ananse Pack -->
+            <div class="pack-card ananse">
+                <div class="pack-icon">🕷️</div>
+                <h3>Ananse Pack</h3>
+                <p>Weave your web of knowledge with coding, robotics, and creative problem-solving activities.</p>
+                <button class="pack-button" onclick="openModal('ananse')">Discover Activities</button>
+            </div>
+
+            <!-- Alikoto Pack -->
+            <div class="pack-card alikoto">
+                <div class="pack-icon">🌍</div>
+                <h3>Alikoto Pack</h3>
+                <p>Explore the wonders of nature through science experiments, engineering challenges, and eco-projects.</p>
+                <button class="pack-button" onclick="openModal('alikoto')">Discover Activities</button>
+            </div>
+
+            <!-- Sankofa Pack -->
+            <div class="pack-card sankofa">
+                <div class="pack-icon">🎨</div>
+                <h3>Sankofa Pack</h3>
+                <p>Learn from the past to build the future with history-inspired tech projects and cultural STEM activities.</p>
+                <button class="pack-button" onclick="openModal('sankofa')">Discover Activities</button>
             </div>
         </div>
     </section>
 
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <h2 class="section-title" style="color: white; -webkit-text-fill-color: white;">Get in Touch</h2>
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label>Name *</label>
-                    <input type="text" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" name="phone">
-                </div>
-                <div class="form-group">
-                    <label>Select Kit</label>
-                    <select name="kit" id="kitSelect"></select>
-                </div>
-                <div class="form-group">
-                    <label>Message *</label>
-                    <textarea name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Inquiry</button>
-            </form>
-            <div class="contact-info">
-                <p>📧 Email: hello@makerspace.com</p>
-                <p>📞 Phone: +1 (555) 123-4567</p>
-                <p>📍 Location: 123 Innovation Drive, Tech City, TC 12345</p>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📧</span>
+                <span>hello@makerspace.com</span>
+            </div>
+            <div class="contact-item">
+                <span>📱</span>
+                <span>+233 50 123 4567</span>
+            </div>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>Accra, Ghana</span>
+            </div>
+            <div class="contact-item">
+                <span>🕐</span>
+                <span>Mon - Fri: 9:00 AM - 5:00 PM</span>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Maker Space. All rights reserved.</p>
-        <p>Inspiring young minds through science, technology, engineering, and mathematics</p>
+        <p>&copy; 2026 Maker Space. Inspiring young innovators, one kit at a time.</p>
     </footer>
 
-    <div class="modal" id="kitModal">
+    <!-- Modal -->
+    <div class="modal" id="modal">
         <div class="modal-content">
-            <div class="modal-header" id="modalHeader">
-                <button class="close-button" onclick="closeKitModal()">&times;</button>
-                <h2 id="modalTitle"></h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
             </div>
-            <div class="modal-body">
-                <div class="carousel-wrapper" id="carouselWrapper">
-                    <!-- Carousel slides will be inserted here -->
-                </div>
-                <div class="kit-details">
-                    <h3 id="detailsTitle"></h3>
-                    <div class="price" id="detailsPrice"></div>
-                    <ul class="details-activities" id="detailsActivities"></ul>
-                </div>
-                <div class="purchase-cta">
-                    <button class="purchase-button btn-primary" onclick="purchaseNow()">
-                        🛒 Purchase Now
-                    </button>
-                    <button class="purchase-button btn-secondary" onclick="contactAboutKit()">
-                        💬 Contact Us
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="success-modal" id="successModal">
-        <div class="success-content">
-            <h3>✅ Success!</h3>
-            <p id="successMessage">Thank you for your interest. We'll get back to you within 24 hours.</p>
-            <button class="close-success" onclick="closeSuccessModal()">Close</button>
+            <div class="activities-grid" id="activities-grid"></div>
         </div>
     </div>
 
     <script>
-        const kits = [
-            {
-                name: "Arts & Craft Kit",
-                price: "GHS 250",
-                icon: "🤖",
-                gradient: "gradient-1",
-                color: "#667eea",
-                images: [
-                    { icon: "🤖", caption: "Bead making", gradient: "gradient-1" },
-                    { icon: "💻", caption: "Canvas Painting", gradient: "gradient-1" },
-                    { icon: "⚙️", caption: "Journal Design", gradient: "gradient-1" },
-                    { icon: "📡", caption: "Sewing Project", gradient: "gradient-1" },
-                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
-                ],
-                activities: [
-                    "Bead making",
-                    "Canvas Painting",
-                    "Journal Design",
-                    "Sewing Project",
-                    "Freebies"
-                ]
-            },
-            {
-                name: "Ananse Pack",
-                price: "GHS 250",
-                icon: "🤖",
-                gradient: "gradient-1",
-                color: "#667eea",
-                images: [
-                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
-                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
-                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
-                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
-                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
-                ],
-                activities: [
-                    "Build your first robot",
-                    "Learn basic programming",
-                    "Motor control exercises",
-                    "Sensor integration",
-                    "5 guided projects"
-                ]
-            },
-            {
-                name: "Robotics Starter Pack",
-                price: "$79.99",
-                icon: "🤖",
-                gradient: "gradient-1",
-                color: "#667eea",
-                images: [
-                    { icon: "🤖", caption: "Build Your First Robot", gradient: "gradient-1" },
-                    { icon: "💻", caption: "Learn Basic Programming", gradient: "gradient-1" },
-                    { icon: "⚙️", caption: "Motor Control Exercises", gradient: "gradient-1" },
-                    { icon: "📡", caption: "Sensor Integration", gradient: "gradient-1" },
-                    { icon: "🎯", caption: "5 Guided Projects", gradient: "gradient-1" }
-                ],
-                activities: [
-                    "Build your first robot",
-                    "Learn basic programming",
-                    "Motor control exercises",
-                    "Sensor integration",
-                    "5 guided projects"
-                ]
-            },
-            
-            {
-                name: "Electronics Circuit Set",
-                price: "$89.99",
-                icon: "⚡",
-                gradient: "gradient-3",
-                color: "#3f2b96",
-                images: [
-                    { icon: "⚡", caption: "Build Working Circuits", gradient: "gradient-3" },
-                    { icon: "💡", caption: "LED Light Projects", gradient: "gradient-3" },
-                    { icon: "🔌", caption: "Arduino Basics", gradient: "gradient-3" },
-                    { icon: "🔋", caption: "Breadboard Experiments", gradient: "gradient-3" },
-                    { icon: "📐", caption: "10 Circuit Designs", gradient: "gradient-3" }
-                ],
-                activities: [
-                    "Build working circuits",
-                    "LED light projects",
-                    "Arduino basics",
-                    "Breadboard experiments",
-                    "10 circuit designs"
-                ]
-            },
-            {
-                name: "Physics Explorer",
-                price: "$69.99",
-                icon: "🔭",
-                gradient: "gradient-4",
-                color: "#6e48aa",
-                images: [
-                    { icon: "🔭", caption: "Force & Motion Experiments", gradient: "gradient-4" },
-                    { icon: "⚙️", caption: "Build Simple Machines", gradient: "gradient-4" },
-                    { icon: "⚡", caption: "Energy Demonstrations", gradient: "gradient-4" },
-                    { icon: "🌍", caption: "Gravity Experiments", gradient: "gradient-4" },
-                    { icon: "🎯", caption: "12 Hands-On Activities", gradient: "gradient-4" }
-                ],
-                activities: [
-                    "Force & motion experiments",
-                    "Build simple machines",
-                    "Energy demonstrations",
-                    "Gravity experiments",
-                    "12 hands-on activities"
-                ]
-            },
-            {
-                name: "Coding Adventure",
-                price: "$54.99",
-                icon: "💻",
-                gradient: "gradient-5",
-                color: "#7f7fd5",
-                images: [
-                    { icon: "🐍", caption: "Learn Python Basics", gradient: "gradient-5" },
-                    { icon: "🎮", caption: "Create Interactive Games", gradient: "gradient-5" },
-                    { icon: "🧩", caption: "Algorithm Challenges", gradient: "gradient-5" },
-                    { icon: "📚", caption: "Project-Based Learning", gradient: "gradient-5" },
-                    { icon: "🌐", caption: "Online Platform Access", gradient: "gradient-5" }
-                ],
-                activities: [
-                    "Learn Python basics",
-                    "Create interactive games",
-                    "Algorithm challenges",
-                    "Project-based learning",
-                    "Online platform access"
-                ]
-            },
-            {
-                name: "Engineering Structures",
-                price: "$74.99",
-                icon: "🏗️",
-                gradient: "gradient-6",
-                color: "#5f72bd",
-                images: [
-                    { icon: "🌉", caption: "Build Bridges & Towers", gradient: "gradient-6" },
-                    { icon: "📐", caption: "Architectural Design", gradient: "gradient-6" },
-                    { icon: "⚖️", caption: "Load Testing", gradient: "gradient-6" },
-                    { icon: "📋", caption: "Blueprint Reading", gradient: "gradient-6" },
-                    { icon: "🏗️", caption: "8 Construction Projects", gradient: "gradient-6" }
-                ],
-                activities: [
-                    "Build bridges & towers",
-                    "Architectural design",
-                    "Load testing",
-                    "Blueprint reading",
-                    "8 construction projects"
-                ]
-            }
-        ];
-
-        let currentKit = null;
-        let currentSlide = 0;
-        let carouselInterval = null;
-
-        function renderKits() {
-            const container = document.getElementById('kitsContainer');
-            const select = document.getElementById('kitSelect');
-            
-            select.innerHTML = '<option value="">Select a kit...</option>';
-            
-            kits.forEach((kit, index) => {
-                const card = document.createElement('div');
-                card.className = 'kit-card';
-                card.onclick = () => openKitModal(index);
-                card.innerHTML = `
-                    <div class="kit-image ${kit.gradient}">${kit.icon}</div>
-                    <div class="kit-content">
-                        <h3 class="kit-title">${kit.name}</h3>
-                        <div class="kit-price" style="color: ${kit.color}">${kit.price}</div>
-                        <ul class="activities-list">
-                            ${kit.activities.map(activity => `<li style="color: ${kit.color}">${activity}</li>`).join('')}
-                        </ul>
-                        <button class="view-button ${kit.gradient}">View Details & Video</button>
-                    </div>
-                `;
-                container.appendChild(card);
-                
-                const option = document.createElement('option');
-                option.value = kit.name;
-                option.textContent = kit.name;
-                select.appendChild(option);
-            });
+        // Circuit background animation
+        const circuitsContainer = document.getElementById('circuits');
+        for (let i = 0; i < 20; i++) {
+            const line = document.createElement('div');
+            line.className = 'circuit-line';
+            line.style.width = Math.random() > 0.5 ? '2px' : `${Math.random() * 200 + 50}px`;
+            line.style.height = Math.random() > 0.5 ? '2px' : `${Math.random() * 200 + 50}px`;
+            line.style.left = `${Math.random() * 100}%`;
+            line.style.top = `${Math.random() * 100}%`;
+            line.style.animationDelay = `${Math.random() * 3}s`;
+            circuitsContainer.appendChild(line);
         }
 
-        function openKitModal(index) {
-            currentKit = kits[index];
-            currentSlide = 0;
-            const modal = document.getElementById('kitModal');
-            const modalHeader = document.getElementById('modalHeader');
-            const carouselWrapper = document.getElementById('carouselWrapper');
+        // Pack data
+        const packs = {
+            ananse: {
+                title: '🕷️ Ananse Pack',
+                description: 'Named after the legendary spider of wisdom, this pack weaves together coding, robotics, and problem-solving.',
+                activities: [
+                    { emoji: '🤖', name: 'Robot Builder', desc: 'Build and program your own moving robot' },
+                    { emoji: '💻', name: 'Coding Adventures', desc: 'Learn basic programming through fun games' },
+                    { emoji: '🎮', name: 'Game Design', desc: 'Create your own interactive video game' },
+                    { emoji: '🔌', name: 'Circuit Master', desc: 'Build electronic circuits that light up' },
+                    { emoji: '🎵', name: 'Sound Synthesizer', desc: 'Make music with electronic components' },
+                    { emoji: '🌐', name: 'Web Creator', desc: 'Design your first website from scratch' }
+                ]
+            },
+            alikoto: {
+                title: '🌍 Alikoto Pack',
+                description: 'Meaning "all is there" in Ewe, this pack contains everything to explore nature and science.',
+                activities: [
+                    { emoji: '🌱', name: 'Eco Garden', desc: 'Grow plants and learn about ecosystems' },
+                    { emoji: '🔬', name: 'Science Lab', desc: 'Conduct exciting chemistry experiments' },
+                    { emoji: '🌞', name: 'Solar Power', desc: 'Build devices powered by the sun' },
+                    { emoji: '💧', name: 'Water Cycle', desc: 'Create a mini water filtration system' },
+                    { emoji: '🦋', name: 'Bug Explorer', desc: 'Study insects and their habitats' },
+                    { emoji: '🌡️', name: 'Weather Station', desc: 'Build tools to measure temperature and humidity' }
+                ]
+            },
+            sankofa: {
+                title: '🎨 Sankofa Pack',
+                description: 'Sankofa teaches us to learn from the past. Blend history, culture, and technology in creative ways.',
+                activities: [
+                    { emoji: '🏛️', name: 'Ancient Tech', desc: 'Recreate inventions from ancient civilizations' },
+                    { emoji: '🎭', name: 'Cultural Coding', desc: 'Code animations of traditional stories' },
+                    { emoji: '🗺️', name: 'Map Maker', desc: 'Create interactive historical maps' },
+                    { emoji: '📱', name: 'AR Explorer', desc: 'Build augmented reality experiences' },
+                    { emoji: '🎨', name: 'Digital Art', desc: 'Create art using technology and tradition' },
+                    { emoji: '📚', name: 'Story Engine', desc: 'Build an interactive storytelling app' }
+                ]
+            }
+        };
+
+        function openModal(packName) {
+            const modal = document.getElementById('modal');
+            const pack = packs[packName];
             
-            modalHeader.className = `modal-header ${currentKit.gradient}`;
-            document.getElementById('modalTitle').textContent = currentKit.name;
-            document.getElementById('detailsTitle').textContent = currentKit.name;
-            document.getElementById('detailsPrice').textContent = currentKit.price;
-            document.getElementById('detailsPrice').style.color = currentKit.color;
+            document.getElementById('modal-title').textContent = pack.title;
+            document.getElementById('modal-description').textContent = pack.description;
             
-            const activitiesList = document.getElementById('detailsActivities');
-            activitiesList.innerHTML = currentKit.activities
-                .map(activity => `<li style="border-left: 4px solid ${currentKit.color}">${activity}</li>`)
-                .join('');
+            const grid = document.getElementById('activities-grid');
+            grid.innerHTML = '';
             
-            // Create carousel
-            let carouselHTML = '';
-            currentKit.images.forEach((img, idx) => {
-                carouselHTML += `
-                    <div class="carousel-slide ${idx === 0 ? 'active' : ''} ${img.gradient}">
-                        <div style="font-size: 6rem;">${img.icon}</div>
-                        <div class="carousel-caption">${img.caption}</div>
-                    </div>
+            pack.activities.forEach(activity => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                item.innerHTML = `
+                    <div class="activity-image">${activity.emoji}</div>
+                    <h4>${activity.name}</h4>
+                    <p>${activity.desc}</p>
                 `;
+                grid.appendChild(item);
             });
             
-            // Add controls
-            carouselHTML += `
-                <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="prevSlide()">❮</button>
-                    <button class="carousel-btn" onclick="nextSlide()">❯</button>
-                </div>
-                <div class="carousel-indicators">
-                    ${currentKit.images.map((_, idx) => 
-                        `<button class="indicator ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})"></button>`
-                    ).join('')}
-                </div>
-            `;
-            
-            carouselWrapper.innerHTML = carouselHTML;
-            modal.style.display = 'flex';
-            
-            // Start auto-play
-            startCarousel();
+            modal.classList.add('active');
         }
 
-        function closeKitModal() {
-            const modal = document.getElementById('kitModal');
-            stopCarousel();
-            modal.style.display = 'none';
-            currentKit = null;
-            currentSlide = 0;
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
         }
 
-        function startCarousel() {
-            stopCarousel();
-            carouselInterval = setInterval(() => {
-                nextSlide();
-            }, 3000);
-        }
-
-        function stopCarousel() {
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-                carouselInterval = null;
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
-        }
-
-        function showSlide(index) {
-            if (!currentKit) return;
-            
-            const slides = document.querySelectorAll('.carousel-slide');
-            const indicators = document.querySelectorAll('.indicator');
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(ind => ind.classList.remove('active'));
-            
-            currentSlide = (index + currentKit.images.length) % currentKit.images.length;
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-        }
-
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentSlide - 1);
-        }
-
-        function goToSlide(index) {
-            stopCarousel();
-            showSlide(index);
-            startCarousel();
-        }
-
-        function purchaseNow() {
-            if (currentKit) {
-                document.getElementById('successMessage').textContent = 
-                    `Great choice! You've selected the ${currentKit.name}. Our team will contact you shortly to complete your purchase.`;
-                closeKitModal();
-                document.getElementById('successModal').style.display = 'flex';
-            }
-        }
-
-        function contactAboutKit() {
-            if (currentKit) {
-                document.getElementById('kitSelect').value = currentKit.name;
-                closeKitModal();
-                document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
-            }
-        }
-
-        function playMainVideo() {
-            alert('Main demo video would play here! In a real implementation, this would showcase all kits in action.');
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').style.display = 'none';
-        }
-
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('successMessage').textContent = 
-                'Thank you for your interest. We\'ll get back to you within 24 hours.';
-            document.getElementById('successModal').style.display = 'flex';
-            this.reset();
         });
 
-        window.onclick = function(event) {
-            const kitModal = document.getElementById('kitModal');
-            if (event.target === kitModal) {
-                closeKitModal();
-            }
-        }
-
-        renderKits();
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
